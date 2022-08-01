@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <GVL Name="GVL" Id="{0630ac8f-8f6f-41cf-a1f5-09dd7efd03ad}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	EmergencyStopButton				AT%I*	: BOOL;
+	StopButton						AT%I*	: BOOL;
+	StartButton						AT%I*	: BOOL;
+	ProductDetectedSensor			AT%I*	: BOOL;
+	ConveyorFullSensor				AT%I*	: BOOL;
+
+	MotorContactor					AT%Q*	: BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

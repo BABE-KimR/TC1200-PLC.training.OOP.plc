@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="MAIN" Id="{c4f7f62f-cc75-4e12-8409-3b8d73c193e4}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	ConveyorControl				: BOOL;
+	Timeout						: TOF;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Conveyor control is ok when the ES nor the stop button is pushed
+IF GVL.StopButton.IsPressed OR GVL.EmergencyStopButton.IsPressed	THEN
+	ConveyorControl	:= FALSE;
+	
+ELSIF gvl.StartButton.IsPressed	AND gvl.StopButton.IsReleased		THEN
+	ConveyorControl	:= TRUE;
+	
+END_IF
+
+// Minimum time the conveyor keeps on running
+Timeout(IN:= ConveyorControl AND gvl.ProductDetectedSensor.IsActive, PT:=T#5S, Q=> , ET=> );
+// Conveyor keeps on running until not full and some extra time
+gvl.MotorContactor	:= ConveyorControl AND Timeout.Q AND NOT gvl.ConveyorFullSensor;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

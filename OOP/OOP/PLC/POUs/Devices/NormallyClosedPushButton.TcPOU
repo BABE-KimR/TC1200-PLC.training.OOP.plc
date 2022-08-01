@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="NormallyClosedPushButton" Id="{f56c4bf2-d904-471a-ac61-ffa50c7ba15b}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'NormallyClosedPushButton is a CLASS and must be accessed using methods or properties'}
+FUNCTION_BLOCK NormallyClosedPushButton
+VAR
+	input				AT %I*: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IsPressed" Id="{b18a6356-0fa4-455d-bf94-216ee43a5dfa}">
+      <Declaration><![CDATA[PROPERTY IsPressed : bool]]></Declaration>
+      <Get Name="Get" Id="{9805feec-4685-4d6d-ac6f-82b78d2e8bf5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsPressed				:= not input;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsReleased" Id="{87dc275f-e4c2-48cb-aff2-a0777f240929}">
+      <Declaration><![CDATA[PROPERTY IsReleased : bool]]></Declaration>
+      <Get Name="Get" Id="{f11c0aeb-59f4-41d2-b881-2d0dcd8b724b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsPressed				:= input;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

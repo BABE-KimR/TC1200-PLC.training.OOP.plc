@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="Contactor" Id="{664e749d-a50b-4bbd-bd24-e8f436436cd9}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'Contactor is a CLASS and must be accessed using methods or properties'}
+FUNCTION_BLOCK Contactor
+VAR
+	output				AT %Q*: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="SwitchOff" Id="{ae9d30a0-94a1-419a-ad1c-2911e0c12fb3}">
+      <Declaration><![CDATA[METHOD SwitchOff
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[output   := false;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SwitchOn" Id="{18d83911-4b9c-43e2-8c44-46ace6308946}">
+      <Declaration><![CDATA[METHOD SwitchOn
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[output   := true;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

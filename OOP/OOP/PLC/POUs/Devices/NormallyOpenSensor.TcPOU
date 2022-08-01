@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="NormallyOpenSensor" Id="{009a0b10-1ab5-4582-9cc8-968afc7fb534}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'NormallyOpenSensor is a CLASS and must be accessed using methods or properties'}
+FUNCTION_BLOCK NormallyOpenSensor
+VAR
+	input				AT %I*: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IsActive" Id="{2a37620c-d5da-4012-826b-3868d05113fb}">
+      <Declaration><![CDATA[PROPERTY IsActive : bool]]></Declaration>
+      <Get Name="Get" Id="{19a34990-c411-4e40-b2de-6c755d2e08c6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsActive				:= not input;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsNotActive" Id="{17dd950a-2c3b-464c-b165-865ca60ae828}">
+      <Declaration><![CDATA[PROPERTY IsNotActive : bool]]></Declaration>
+      <Get Name="Get" Id="{1b02d1f0-0cdf-48d2-87c3-7a7214932ddb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsActive				:= input;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
