@@ -1,15 +1,53 @@
 <?xml version="1.0"?>
 <TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32" ClassName="CNestedPlcProjDef">
-	<Project GUID="{95F8C5DF-D42D-49C0-8877-7CB98F614318}" Name="PLC_NoOOP" PrjFilePath="..\..\PLC_NoOOP\PLC_NoOOP.plcproj" TmcFilePath="..\..\PLC_NoOOP\PLC_NoOOP.tmc" ReloadTmc="true" AmsPort="852" TargetArchiveSettings="#x0003" FileArchiveSettings="#x0002" SymbolicMapping="true">
-		<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+	<Project Disabled="true" GUID="{95F8C5DF-D42D-49C0-8877-7CB98F614318}" Name="PLC_NoOOP" PrjFilePath="..\..\PLC_NoOOP\PLC_NoOOP.plcproj" TmcFilePath="..\..\PLC_NoOOP\PLC_NoOOP.tmc" ReloadTmc="true" AmsPort="852" TargetArchiveSettings="#x0003" FileArchiveSettings="#x0002" SymbolicMapping="true">
+		<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{697B9A14-F697-CFC3-92E9-E3305C1E7DB2}">
 			<Name>PLC_NoOOP Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+			<Vars VarGrpType="1">
+				<Name>PlcTask Inputs</Name>
+				<Var>
+					<Name>GVL.EmergencyStopButton</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.StopButton</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.StartButton</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.ProductDetectedSensor</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.ConveyorFullSensor</Name>
+					<Type>BOOL</Type>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="2" AreaNo="1">
+				<Name>PlcTask Outputs</Name>
+				<Var>
+					<Name>GVL.MotorContactor</Name>
+					<Type>BOOL</Type>
+				</Var>
+			</Vars>
 			<Contexts>
 				<Context>
-					<Id>1</Id>
-					<Name>Default</Name>
+					<Id NeedCalleeCall="true">0</Id>
+					<Name>PlcTask</Name>
+					<ManualConfig>
+						<OTCID>#x02010040</OTCID>
+					</ManualConfig>
+					<Priority>21</Priority>
+					<CycleTime>10000000</CycleTime>
 				</Context>
 			</Contexts>
+			<TaskPouOids>
+				<TaskPouOid Prio="21" OTCID="#x08502041"/>
+			</TaskPouOids>
 		</Instance>
 	</Project>
 </TcSmItem>

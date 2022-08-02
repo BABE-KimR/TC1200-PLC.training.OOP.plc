@@ -1,15 +1,53 @@
 <?xml version="1.0"?>
 <TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32" ClassName="CNestedPlcProjDef">
 	<Project GUID="{D92D8E76-7723-4574-909B-0AC3A7B65D74}" Name="PLC" PrjFilePath="..\..\PLC\PLC.plcproj" TmcFilePath="..\..\PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" TargetArchiveSettings="#x0003" FileArchiveSettings="#x0002" SymbolicMapping="true">
-		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{5131997E-8267-815B-A2BD-061D3914C656}">
 			<Name>PLC Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+			<Vars VarGrpType="1">
+				<Name>PlcTask Inputs</Name>
+				<Var>
+					<Name>GVL.emergencyStopButton.input</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.stopButton.input</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.startButton.input</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.productDetectedSensor.input</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL.conveyorFullSensor.input</Name>
+					<Type>BOOL</Type>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="2" AreaNo="1">
+				<Name>PlcTask Outputs</Name>
+				<Var>
+					<Name>GVL.conveyorMotor.contactor.output</Name>
+					<Type>BOOL</Type>
+				</Var>
+			</Vars>
 			<Contexts>
 				<Context>
-					<Id>1</Id>
-					<Name>Default</Name>
+					<Id NeedCalleeCall="true">0</Id>
+					<Name>PlcTask</Name>
+					<ManualConfig>
+						<OTCID>#x02010030</OTCID>
+					</ManualConfig>
+					<Priority>20</Priority>
+					<CycleTime>10000000</CycleTime>
 				</Context>
 			</Contexts>
+			<TaskPouOids>
+				<TaskPouOid Prio="20" OTCID="#x08502001"/>
+			</TaskPouOids>
 		</Instance>
 	</Project>
 </TcSmItem>

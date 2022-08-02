@@ -1,14 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="MAIN" Id="{c4f7f62f-cc75-4e12-8409-3b8d73c193e4}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+    <Declaration><![CDATA[// Based upon Coding Bytes TwinCAT 3 (all credits to Beckhoff Australia - Ben Harrison)
+// OOP Introduction - Part 1: 	https://beckhoff-au.teachable.com/courses/1204788/lectures/30170060
+// OOP Introduction - Part 2: 	https://beckhoff-au.teachable.com/courses/1204788/lectures/30173203
+PROGRAM MAIN
 VAR
 	ConveyorControl				: BOOL;
 	Timeout						: TOF;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Conveyor control is ok when the ES nor the stop button is pushed
+      <ST><![CDATA[(*
+// Conveyor control is ok when the ES nor the stop button is pushed
 IF GVL.StopButton.IsPressed OR GVL.EmergencyStopButton.IsPressed	THEN
 	ConveyorControl	:= FALSE;
 	
@@ -20,7 +24,16 @@ END_IF
 // Minimum time the conveyor keeps on running
 Timeout(IN:= ConveyorControl AND gvl.ProductDetectedSensor.IsActive, PT:=T#5S, Q=> , ET=> );
 // Conveyor keeps on running until not full and some extra time
-gvl.MotorContactor	:= ConveyorControl AND Timeout.Q AND NOT gvl.ConveyorFullSensor;]]></ST>
+IF ConveyorControl AND Timeout.Q AND gvl.ConveyorFullSensor.IsNotActive THEN
+	gvl.ConveyorMotor.Start();
+ELSE
+	gvl.ConveyorMotor.Stop();
+END_IF
+*)
+
+// All the above can be replaced by the below after finishing the code
+GVL.sortingConveyor();
+GVL.myConveyorSortingMachine();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

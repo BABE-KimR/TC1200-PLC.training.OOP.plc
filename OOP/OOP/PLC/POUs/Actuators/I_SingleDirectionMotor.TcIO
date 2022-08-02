@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Itf Name="I_SingleDirectionMotor" Id="{9238e941-d894-4aa5-b8c5-1d053e31c834}">
+    <Declaration><![CDATA[INTERFACE I_SingleDirectionMotor
+]]></Declaration>
+    <Method Name="Start" Id="{01beb6f7-92f1-4bb9-b8fc-e4c1aada33a8}">
+      <Declaration><![CDATA[METHOD Start
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Stop" Id="{ee299f31-c451-4c7a-9b02-ee1c094ca48e}">
+      <Declaration><![CDATA[METHOD Stop
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

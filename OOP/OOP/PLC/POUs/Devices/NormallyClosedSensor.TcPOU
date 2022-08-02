@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="NormallyClosedSensor" Id="{f2e2a4e5-2f5d-4474-b654-fc2a4952e61f}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'NormallyClosedSensor is a CLASS and must be accessed using methods or properties'}
-FUNCTION_BLOCK NormallyClosedSensor
+FUNCTION_BLOCK NormallyClosedSensor implements I_Sensor
 VAR
 	input				AT %I*: BOOL;
 END_VAR
@@ -28,7 +28,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IsActive				:= not input;]]></ST>
+          <ST><![CDATA[IsNotActive				:= not input;]]></ST>
         </Implementation>
       </Get>
     </Property>

@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="NormallyOpenSensor" Id="{009a0b10-1ab5-4582-9cc8-968afc7fb534}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'NormallyOpenSensor is a CLASS and must be accessed using methods or properties'}
-FUNCTION_BLOCK NormallyOpenSensor
+FUNCTION_BLOCK NormallyOpenSensor implements I_Sensor
 VAR
 	input				AT %I*: BOOL;
 END_VAR

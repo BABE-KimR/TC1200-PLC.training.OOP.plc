@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="ConveyorSortingMachine" Id="{fcda2a5b-994a-4297-8cfc-3b8b416b3d69}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ConveyorSortingMachine
+VAR
+	emergencyStopButton				: I_PushButton;
+	stopButton						: I_PushButton;
+	startButton						: I_PushButton;	
+	conveyorModule					: I_Module;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Conveyor control is ok when the ES nor the stop button is pushed
+IF StopButton.IsPressed OR EmergencyStopButton.IsPressed	THEN
+	conveyorModule.Disable();
+	
+ELSIF StartButton.IsPressed	AND StopButton.IsReleased		THEN
+	conveyorModule.Enable();	
+	
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{628923e6-17b0-4cb9-96b0-e2393a8af279}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	emergencyStopButton				: I_PushButton;
+	stopButton						: I_PushButton;
+	startButton						: I_PushButton;	
+	conveyorModule					: I_Module;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.emergencyStopButton				:= emergencyStopButton;
+THIS^.stopButton						:= stopButton;
+THIS^.startButton						:= startButton;	
+THIS^.conveyorModule					:= conveyorModule;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

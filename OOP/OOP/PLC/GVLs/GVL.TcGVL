@@ -3,13 +3,27 @@
   <GVL Name="GVL" Id="{666e43bf-616e-4fc1-9112-d6791a615660}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	EmergencyStopButton				: NormallyClosedPushButton;
-	StopButton						: NormallyClosedPushButton;
-	StartButton						: NormallyOpenPushButton;
+	emergencyStopButton				: NormallyClosedPushButton;
+	stopButton						: NormallyClosedPushButton;
+	startButton						: NormallyOpenPushButton;
 	
-	ProductDetectedSensor			: NormallyClosedSensor;
-	MotorContactor					: NormallyClosedSensor;
-	ConveyorFullSensor				: BOOL;
+	productDetectedSensor			: NormallyClosedSensor;
+	conveyorFullSensor				: NormallyClosedSensor;
+
+	conveyorMotor					: DirectOnlineStarterMotor;
+	
+	sortingConveyor					: SortingConveyor(
+										productDetected		:= productDetectedSensor,
+										conveyorFull		:= conveyorFullSensor,
+										conveyor			:= conveyorMotor);
+	
+	myConveyorSortingMachine		: ConveyorSortingMachine(
+										emergencyStopButton	:= emergencyStopButton,
+										stopButton			:= stopButton,
+										startButton			:= startButton,	
+										conveyorModule		:= sortingCOnveyor);
+	
+	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

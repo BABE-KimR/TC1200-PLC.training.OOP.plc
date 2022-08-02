@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="NormallyClosedPushButton" Id="{f56c4bf2-d904-471a-ac61-ffa50c7ba15b}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'NormallyClosedPushButton is a CLASS and must be accessed using methods or properties'}
-FUNCTION_BLOCK NormallyClosedPushButton
+FUNCTION_BLOCK NormallyClosedPushButton implements I_PushButton
 VAR
 	input				AT %I*: BOOL;
 END_VAR
@@ -28,7 +28,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IsPressed				:= input;]]></ST>
+          <ST><![CDATA[IsReleased				:= input;]]></ST>
         </Implementation>
       </Get>
     </Property>

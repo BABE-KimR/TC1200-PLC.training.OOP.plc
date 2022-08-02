@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="SortingConveyor" Id="{48a70715-9c2b-468d-8e54-fd24c2bb2a2a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SortingConveyor IMPLEMENTS I_Module
+VAR
+	productDetected			: I_Sensor;
+	conveyorFull			: I_Sensor;
+	conveyor				: I_SingleDirectionMotor;
+	enabled					: BOOL;
+	timeout					: tof;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Minimum time the conveyor keeps on running
+Timeout(IN:= enabled AND productDetected.IsActive, PT:=T#5S, Q=> , ET=> );
+// Conveyor keeps on running until not full and some extra time
+IF enabled AND Timeout.Q AND conveyorFull.IsNotActive THEN
+	conveyor.Start();
+ELSE
+	conveyor.Stop();
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="Disable" Id="{c563b24c-89f7-4c82-9bb5-deb4ec87f72c}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Disable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[enabled := false;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enable" Id="{13c9a38a-6927-47c8-84bd-b8bb24a3d3d3}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Enable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[enabled := true;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{c36b35d1-af6c-4af5-ac2e-82a81ffef2c2}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	productDetected			: I_Sensor;
+	conveyorFull			: I_Sensor;
+	conveyor				: I_SingleDirectionMotor;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.productDetected		:= productDetected;
+THIS^.conveyorFull			:= conveyorFull;
+THIS^.conveyor				:= conveyor;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
