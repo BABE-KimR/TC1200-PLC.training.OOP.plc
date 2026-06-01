@@ -87,6 +87,8 @@ One style note: Ben Harrison mentions that Hungarian notation (FB_, ST_, E_ pref
 
 ### The Machine
 
+![Conveyor sorting machine](machine.png)
+
 The example in both video parts controls a conveyor sorting machine:
 
 ```

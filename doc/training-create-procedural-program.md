@@ -16,6 +16,8 @@ Work through each step in order. When you are done, you will have a functional T
 
 ## The Machine
 
+![Conveyor sorting machine](machine.png)
+
 The machine you are programming is a conveyor sorting machine.
 
 **Control panel** (top of machine):

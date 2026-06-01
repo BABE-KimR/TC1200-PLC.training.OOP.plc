@@ -15,6 +15,8 @@ Open `OOP/OOP.sln` in TwinCAT XAE to load both projects. Both live inside the sa
 
 ## The Machine
 
+![Conveyor sorting machine](doc/machine.png)
+
 A conveyor sorting machine with a start/stop control panel and two sensors:
 
 ```
