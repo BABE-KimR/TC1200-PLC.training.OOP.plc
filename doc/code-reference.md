@@ -81,30 +81,30 @@ The OOP project organises code into four layers, each depending only on the laye
 
 ```mermaid
 graph TB
-    subgraph Machine Layer
-        CSM["ConveyorSortingMachine"]
+    subgraph "Machine Layer"
+        CSM[ConveyorSortingMachine]
     end
-    subgraph Module Layer
-        SC["SortingConveyor"]
+    subgraph "Module Layer"
+        SC[SortingConveyor]
     end
-    subgraph Actuator Layer
-        DOL["DirectOnlineStarterMotor"]
-        C["Contactor"]
+    subgraph "Actuator Layer"
+        DOL[DirectOnlineStarterMotor]
+        C[Contactor]
     end
-    subgraph Device Layer
-        NCPB["NormallyClosedPushButton"]
-        NOPB["NormallyOpenPushButton"]
-        NCS["NormallyClosedSensor"]
-        NOS["NormallyOpenSensor"]
+    subgraph "Device Layer"
+        NCPB[NormallyClosedPushButton]
+        NOPB[NormallyOpenPushButton]
+        NCS[NormallyClosedSensor]
+        NOS[NormallyOpenSensor]
     end
 
-    CSM -->|I_PushButton ×3| NCPB
-    CSM -->|I_PushButton| NOPB
-    CSM -->|I_Module| SC
-    SC -->|I_Sensor ×2| NCS
-    SC -->|I_Sensor| NOS
-    SC -->|I_SingleDirectionMotor| DOL
-    DOL -->|owns| C
+    CSM -->|"I_PushButton x3"| NCPB
+    CSM -->|"I_PushButton"| NOPB
+    CSM -->|"I_Module"| SC
+    SC -->|"I_Sensor x2"| NCS
+    SC -->|"I_Sensor"| NOS
+    SC -->|"I_SingleDirectionMotor"| DOL
+    DOL -->|"owns"| C
 ```
 
 Each arrow represents an interface dependency — the higher layer never names the concrete class it receives.
@@ -113,20 +113,18 @@ Each arrow represents an interface dependency — the higher layer never names t
 
 ```mermaid
 classDiagram
-    direction TB
-
     class I_PushButton {
         <<interface>>
         +IsPressed() BOOL
         +IsReleased() BOOL
     }
     class NormallyOpenPushButton {
-        -input AT %I* : BOOL
+        -input BOOL
         +IsPressed() BOOL
         +IsReleased() BOOL
     }
     class NormallyClosedPushButton {
-        -input AT %I* : BOOL
+        -input BOOL
         +IsPressed() BOOL
         +IsReleased() BOOL
     }
@@ -139,12 +137,12 @@ classDiagram
         +IsNotActive() BOOL
     }
     class NormallyOpenSensor {
-        -input AT %I* : BOOL
+        -input BOOL
         +IsActive() BOOL
         +IsNotActive() BOOL
     }
     class NormallyClosedSensor {
-        -input AT %I* : BOOL
+        -input BOOL
         +IsActive() BOOL
         +IsNotActive() BOOL
     }
@@ -152,7 +150,7 @@ classDiagram
     NormallyClosedSensor ..|> I_Sensor : implements
 
     class Contactor {
-        -output AT %Q* : BOOL
+        -output BOOL
         +SwitchOn()
         +SwitchOff()
     }
@@ -162,7 +160,7 @@ classDiagram
         +Stop()
     }
     class DirectOnlineStarterMotor {
-        -contactor : Contactor
+        -contactor Contactor
         +Start()
         +Stop()
     }
@@ -175,28 +173,30 @@ classDiagram
         +Disable()
     }
     class SortingConveyor {
-        -productDetected : I_Sensor
-        -conveyorFull : I_Sensor
-        -conveyor : I_SingleDirectionMotor
-        -enabled : BOOL
-        -timeout : TOF
+        -productDetected I_Sensor
+        -conveyorFull I_Sensor
+        -conveyor I_SingleDirectionMotor
+        -enabled BOOL
+        -timeout TOF
         +Enable()
         +Disable()
-        +FB_init(productDetected, conveyorFull, conveyor)
+        +FB_init()
     }
     SortingConveyor ..|> I_Module : implements
-    SortingConveyor o-- I_Sensor : uses ×2
-    SortingConveyor o-- I_SingleDirectionMotor : uses
+    SortingConveyor o-- I_Sensor : productDetected
+    SortingConveyor o-- I_Sensor : conveyorFull
+    SortingConveyor o-- I_SingleDirectionMotor : conveyor
 
     class ConveyorSortingMachine {
-        -emergencyStopButton : I_PushButton
-        -stopButton : I_PushButton
-        -startButton : I_PushButton
-        -conveyorModule : I_Module
-        +FB_init(emergencyStopButton, stopButton, startButton, conveyorModule)
+        -emergencyStopButton I_PushButton
+        -stopButton I_PushButton
+        -startButton I_PushButton
+        -conveyorModule I_Module
+        +FB_init()
     }
-    ConveyorSortingMachine o-- I_PushButton : uses ×3
-    ConveyorSortingMachine o-- I_Module : uses
+    ConveyorSortingMachine o-- I_PushButton : stopButton
+    ConveyorSortingMachine o-- I_PushButton : startButton
+    ConveyorSortingMachine o-- I_Module : conveyorModule
 ```
 
 ### GVL — Object Composition
@@ -233,25 +233,22 @@ The GVL now reads like a parts list. Each variable name describes a real machine
 
 ```mermaid
 graph LR
-    subgraph "GVL — Object Graph"
-        ESB["emergencyStopButton\nNormallyClosedPushButton"]
-        SB["stopButton\nNormallyClosedPushButton"]
-        STB["startButton\nNormallyOpenPushButton"]
-        PDS["productDetectedSensor\nNormallyClosedSensor"]
-        CFS["conveyorFullSensor\nNormallyClosedSensor"]
-        CM["conveyorMotor\nDirectOnlineStarterMotor"]
-        SC["sortingConveyor\nSortingConveyor"]
-        CSM["myConveyorSortingMachine\nConveyorSortingMachine"]
-    end
+    ESB[emergencyStopButton]
+    SB[stopButton]
+    STB[startButton]
+    PDS[productDetectedSensor]
+    CFS[conveyorFullSensor]
+    CM[conveyorMotor]
+    SC[sortingConveyor]
+    CSM[myConveyorSortingMachine]
 
-    PDS -->|productDetected| SC
-    CFS -->|conveyorFull| SC
-    CM  -->|conveyor| SC
-
-    ESB -->|emergencyStopButton| CSM
-    SB  -->|stopButton| CSM
-    STB -->|startButton| CSM
-    SC  -->|conveyorModule| CSM
+    PDS -->|"productDetected"| SC
+    CFS -->|"conveyorFull"| SC
+    CM  -->|"conveyor"| SC
+    ESB -->|"emergencyStopButton"| CSM
+    SB  -->|"stopButton"| CSM
+    STB -->|"startButton"| CSM
+    SC  -->|"conveyorModule"| CSM
 ```
 
 ### MAIN
