@@ -33,6 +33,7 @@ A conveyor sorting machine with a start/stop control panel and two sensors:
 | Document | Contents |
 |---|---|
 | [Code Reference](doc/code-reference.md) | Architecture, Mermaid class diagrams, line-by-line walkthrough of both projects |
+| [Training: Create the Procedural Program](doc/training-create-procedural-program.md) | Step-by-step guide to building `PLC_NoOOP` from scratch — the starting point for the OOP training |
 | [Training: Procedural to OOP](doc/training-procedural-to-oop.md) | Theory, paradigm shift, step-by-step refactoring guide based on the video transcripts |
 
 ## Credits

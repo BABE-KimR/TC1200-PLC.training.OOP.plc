@@ -717,4 +717,5 @@ Once comfortable with this example, the natural next topics are:
 - **Runtime polymorphism** — arrays of `I_Module` references that allow the machine to manage a variable number of modules
 - **Unit testing frameworks** — TcUnit for automated testing of individual function blocks
 
-For further OOP PLC learning, Ben Harrison recommends the YouTube channel of **Christopher Accravi** — a software engineer whose videos cover OOP patterns in depth and translate well to PLC programming.
+For further OOP PLC learning, Ben Harrison recommends the YouTube channel of [**Christopher Ohkravi**](https://www.youtube.com/@ChristopherOkhravi) — a software engineer whose videos cover OOP patterns in depth and translate well to PLC programming.
+
