@@ -1,38 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{95f8c5df-d42d-49c0-8877-7cb98f614318}</ProjectGuid>
+    <ProjectGuid>{68e49c69-226c-4db7-8ef9-a06c287444f1}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>PLC_NoOOP</Name>
+    <Name>PLC_FrameworkOOP</Name>
     <ProgramVersion>3.1.4026.24</ProgramVersion>
-    <Application>{bc5dbdab-c916-4081-baf3-c701b3558891}</Application>
-    <TypeSystem>{38e301e7-7d8f-4a01-9191-3375fc3de7dd}</TypeSystem>
-    <Implicit_Task_Info>{a58be7e1-05ba-4c12-b720-1492f4f1b5a6}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{aaa420f4-e720-42d5-bb01-013c2aed406b}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{846a51d7-0575-45d2-8472-f2fc0703bda8}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{606f238e-a8ae-4844-8c8a-2a3641f6129d}</LibraryReferences>
+    <WriteBookmarksToFile>true</WriteBookmarksToFile>
+    <Application>{94daa118-9c36-42d9-b67e-4688d7f19878}</Application>
+    <TypeSystem>{01f9db91-7261-4aac-b224-8ba7f4d45754}</TypeSystem>
+    <Implicit_Task_Info>{ef3939bc-7b48-4378-9c86-008acd0f592a}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{7c02aa71-a432-4a45-b969-4b0197aae9f5}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{63c5e6f0-c8bb-4057-98f6-6005cbf7b16d}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{e5642aa2-11fd-4a0c-979b-75a63e0d3233}</LibraryReferences>
+    <CompilerDefines>VISU_USEPROPERTYINFO</CompilerDefines>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GVLs\GVL.TcGVL">
+    <Compile Include="Base\Base.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Devices\I_DigitalInput.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Devices\DigitalInputNC.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Devices\DigitalInputDummy.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Devices\DigitalInputNO.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Devices\DevicesExample.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Devices\DevicesPolymorphismExample.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForceAbles\Forceables.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForceAbles\GVL_Forceables.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="ForceAbles\ST_ForceAble.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forceable\BoolSignal.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forceable\BoolForceable.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forceable\ForceableExample.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forceable\I_Bool.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forceable\I_ForceableBOOL.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GlobalTextList.TcGTLO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\GVL_Logger.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Logger\I_Logger.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\LoggerADS.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MAIN.TcPOU">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
+    <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GVLs" />
-    <Folder Include="POUs" />
-  </ItemGroup>
-  <ItemGroup>
+    <PlaceholderReference Include="System_VisuElemMeter">
+      <DefaultResolution>VisuElemMeter, 4.7.0.0 (System)</DefaultResolution>
+      <Namespace>VisuElemMeter</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElems">
+      <DefaultResolution>VisuElems, 4.8.0.0 (System)</DefaultResolution>
+      <Namespace>VisuElems</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemsSpecialControls">
+      <DefaultResolution>VisuElemsSpecialControls, 4.7.0.0 (System)</DefaultResolution>
+      <Namespace>VisuElemsSpecialControls</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemsWinControls">
+      <DefaultResolution>VisuElemsWinControls, 4.8.0.0 (System)</DefaultResolution>
+      <Namespace>VisuElemsWinControls</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemTextEditor">
+      <DefaultResolution>VisuElemTextEditor, 4.8.0.0 (System)</DefaultResolution>
+      <Namespace>VisuElemTextEditor</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuInputs">
+      <DefaultResolution>VisuInputs, 4.7.0.0 (System)</DefaultResolution>
+      <Namespace>VisuInputs</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuNativeControl">
+      <DefaultResolution>VisuNativeControl, 4.8.0.0 (System)</DefaultResolution>
+      <Namespace>VisuNativeControl</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -44,15 +143,20 @@
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
+      <SystemLibrary>true</SystemLibrary>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PLC_NoOOP.tmc">
+    <Folder Include="Base" />
+    <Folder Include="Devices" />
+    <Folder Include="ForceAbles" />
+    <Folder Include="Logger" />
+    <Folder Include="Forceable" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PLC_FrameworkOOP.tmc">
       <SubType>Content</SubType>
     </None>
-    <Content Include="Setup.png">
-      <SubType>Content</SubType>
-    </Content>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

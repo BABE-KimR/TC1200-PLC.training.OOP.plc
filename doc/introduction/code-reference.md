@@ -8,7 +8,7 @@ Both TwinCAT 3 PLC projects in this repository control the same conveyor sorting
 
 The machine has three control-panel inputs, two field sensors, and one motor output:
 
-| Signal | Type | Wiring | GVL variable (PLC_NoOOP) | GVL variable (PLC) |
+| Signal | Type | Wiring | GVL variable (PLC_NoOOP) | GVL variable (PLC_OOP) |
 |---|---|---|---|---|
 | Emergency Stop | Input | Normally Closed | `EmergencyStopButton AT%I*` | `emergencyStopButton : NormallyClosedPushButton` |
 | Stop | Input | Normally Closed | `StopButton AT%I*` | `stopButton : NormallyClosedPushButton` |
@@ -73,7 +73,7 @@ gvl.MotorContactor := ConveyorControl AND Timeout.Q AND NOT gvl.ConveyorFullSens
 
 ---
 
-## Project 2 — PLC (Object-Oriented)
+## Project 2 — PLC_OOP (Object-Oriented)
 
 ### Architecture Overview
 

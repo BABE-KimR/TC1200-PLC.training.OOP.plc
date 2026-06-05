@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="DigitalInputNC" Id="{715fc0cf-2eef-43dc-af49-dd73af17a4b8}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'DigitalInputNC is a class, do not call this POU directly, use a method'}
+{attribute 'hide_all_locals'}
+FUNCTION_BLOCK DigitalInputNC EXTENDS base IMPLEMENTS I_DigitalInput
+VAR
+    _input   AT %I* : BOOL;
+    _signal  : BoolForceable(concat(name, ' forceable'), GVL_Logger.Logger);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_Init" Id="{12345678-abcd-ef01-2345-6789abcdef01}">
+      <Declaration><![CDATA[METHOD FB_Init : BOOL
+VAR_INPUT
+    bInitRetains : BOOL;
+    bInCopyCode  : BOOL;
+    name         : STRING;
+    logger       : I_Logger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_signal.bind(_input);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="isActive" Id="{7096b06f-4d23-4173-9a0e-2d8432d559db}">
+      <Declaration><![CDATA[PROPERTY isActive : bool]]></Declaration>
+      <Get Name="Get" Id="{130ccbce-e396-44ac-9c45-da6e6a9fe1b0}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isActive := NOT _signal.value;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="isNotActive" Id="{c22a03c0-d059-4087-b358-59756c84e8ea}">
+      <Declaration><![CDATA[PROPERTY isNotActive : bool]]></Declaration>
+      <Get Name="Get" Id="{88ea4f36-d219-4787-8089-a5a753182e06}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isNotActive := _signal.value;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="signal" Id="{11223344-5566-7788-99aa-bbccddeeff00}">
+      <Declaration><![CDATA[PROPERTY signal : I_ForceableBOOL]]></Declaration>
+      <Get Name="Get" Id="{22334455-6677-8899-aabb-ccddeeff0011}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[signal := _signal;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

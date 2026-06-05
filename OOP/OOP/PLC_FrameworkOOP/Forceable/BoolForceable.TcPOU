@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="BoolForceable" Id="{b3c4d5e6-f7a8-9012-3456-789abcdef012}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'BoolForceable is a class, do not call this POU directly, use a method'}
+{attribute 'hide_all_locals'}
+FUNCTION_BLOCK BoolForceable EXTENDS BoolSignal IMPLEMENTS I_ForceableBOOL
+VAR
+    _forced   : BOOL;
+    _isForced : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_Init" Id="{55ee66ff-7788-9900-aabb-ccddeeff0011}">
+      <Declaration><![CDATA[METHOD FB_Init : BOOL
+VAR_INPUT
+    bInitRetains : BOOL;
+    bInCopyCode  : BOOL;
+    name         : STRING;
+    logger       : I_Logger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_Init(bInitRetains, bInCopyCode, name, logger);
+IF name <> '' THEN
+    GVL_Forceables.manager.register(THIS^);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="force" Id="{c4d5e6f7-a8b9-0123-4567-89abcdef0123}">
+      <Declaration><![CDATA[METHOD force
+VAR_INPUT
+    forcedValue : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_forced   := forcedValue;
+_isForced := TRUE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="release" Id="{d5e6f7a8-b9c0-1234-5678-9abcdef01234}">
+      <Declaration><![CDATA[METHOD release
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_isForced := FALSE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="value" Id="{e6f7a8b9-c0d1-2345-6789-abcdef012345}">
+      <Declaration><![CDATA[PROPERTY value : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f7a8b9c0-d1e2-3456-789a-bcdef0123456}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF _isForced THEN
+    value := _forced;
+ELSE
+    value := SUPER^.value;
+END_IF
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="isForced" Id="{a8b9c0d1-e2f3-4567-89ab-cdef01234567}">
+      <Declaration><![CDATA[PROPERTY isForced : BOOL]]></Declaration>
+      <Get Name="Get" Id="{b9c0d1e2-f3a4-5678-9abc-def012345678}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isForced := _isForced;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

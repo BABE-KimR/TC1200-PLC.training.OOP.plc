@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <GVL Name="GVL_Logger" Id="{7cd63e60-a5dd-4b9b-a519-7d8c9472e8e8}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+    logger          : LoggerADS;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

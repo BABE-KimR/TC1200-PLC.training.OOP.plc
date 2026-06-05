@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="Forceables" Id="{2e4db42d-940d-46e8-8f8e-5d75cc86c97f}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'Forceables is a class, do not call this POU directly, use a method'}
+{attribute 'hide_all_locals'}
+FUNCTION_BLOCK Forceables
+VAR
+    _objects : ARRAY[0..GVL_Forceables.MAXFORCEABLES - 1] OF I_ForceableBOOL;
+    _count   : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="register" Id="{61c45a5a-7feb-4274-b09f-1fd0a55deea9}">
+      <Declaration><![CDATA[METHOD register
+VAR_INPUT
+    obj : I_ForceableBOOL;
+END_VAR
+VAR
+    i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF obj = 0 THEN
+    RETURN;
+END_IF
+
+FOR i := 0 TO GVL_Forceables.MAXFORCEABLES - 1 DO
+    IF _objects[i] = obj THEN
+        GVL_Forceables.arrForceables[i].name := obj.name;
+        GVL_Forceables.arrForceables[i].path := obj.path;
+        RETURN;
+    END_IF
+    IF _objects[i] = 0 THEN
+        _objects[i] := obj;
+        GVL_Forceables.arrForceables[i].name := obj.name;
+        GVL_Forceables.arrForceables[i].path := obj.path;
+        GVL_Forceables.arrForceables[i].value := obj.value;
+        _count := _count + 1;
+        RETURN;
+    END_IF
+END_FOR
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="renew" Id="{063c6ca8-9aea-48d4-b41a-faa707f9da68}">
+      <Declaration><![CDATA[METHOD renew
+VAR
+    i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO GVL_Forceables.MAXFORCEABLES - 1 DO
+    IF _objects[i] = 0 THEN
+        CONTINUE;
+    END_IF
+    IF GVL_Forceables.arrForceables[i].forced THEN
+        _objects[i].force(GVL_Forceables.arrForceables[i].forceValue);
+    ELSE
+        _objects[i].release();
+    END_IF
+    GVL_Forceables.arrForceables[i].value := _objects[i].value;
+END_FOR
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="count" Id="{99aabb11-22cc-33dd-44ee-55ff66778899}">
+      <Declaration><![CDATA[PROPERTY count : INT]]></Declaration>
+      <Get Name="Get" Id="{aabb1122-33cc-44dd-55ee-66ff77889900}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[count := _count;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

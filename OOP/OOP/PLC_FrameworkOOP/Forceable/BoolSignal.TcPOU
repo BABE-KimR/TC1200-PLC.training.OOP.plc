@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="BoolSignal" Id="{d9e0f1a2-b3c4-5678-9012-3456789abcde}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'BoolSignal is a class, do not call this POU directly, use a method'}
+{attribute 'hide_all_locals'}
+FUNCTION_BLOCK BoolSignal EXTENDS BASE IMPLEMENTS I_Bool
+VAR
+    _real : REFERENCE TO BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="bind" Id="{e0f1a2b3-c4d5-6789-0123-456789abcdef}">
+      <Declaration><![CDATA[METHOD bind
+VAR_IN_OUT
+    signal : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_real REF= signal;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="value" Id="{f1a2b3c4-d5e6-7890-1234-56789abcdef0}">
+      <Declaration><![CDATA[PROPERTY value : BOOL]]></Declaration>
+      <Get Name="Get" Id="{a2b3c4d5-e6f7-8901-2345-6789abcdef01}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __ISVALIDREF(_real) THEN
+    value := _real;
+END_IF
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

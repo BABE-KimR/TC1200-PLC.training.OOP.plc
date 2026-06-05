@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="DigitalInputDummy" Id="{a42e9d98-7c83-4d68-a949-eda5bb2c0c30}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'DigitalInputDummy is a class, do not call this POU directly, use a method'}
+{attribute 'hide_all_locals'}
+FUNCTION_BLOCK DigitalInputDummy EXTENDS base IMPLEMENTS I_DigitalInput
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="isActive" Id="{2c9cbfdc-ef2d-4012-969f-fa0a482a7f11}">
+      <Declaration><![CDATA[PROPERTY isActive : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{079bde4e-cc03-4c4b-8670-d818ebde538c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isActive := true;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="isNotActive" Id="{61a26e66-5eb2-4a5d-812e-9c96e659a894}">
+      <Declaration><![CDATA[PROPERTY isNotActive : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{b98e411a-24c7-47a9-8134-7d032ff3429a}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isNotActive := true;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

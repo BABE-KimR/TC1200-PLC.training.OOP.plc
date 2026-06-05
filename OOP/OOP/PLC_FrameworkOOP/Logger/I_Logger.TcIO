@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <Itf Name="I_Logger" Id="{43f5726a-fc50-4eae-b0a4-1a7a27915e6c}">
+    <Declaration><![CDATA[INTERFACE I_Logger
+]]></Declaration>
+    <Method Name="trace" Id="{0933aa81-2997-4eae-a8dd-73d7f42a1da6}">
+      <Declaration><![CDATA[METHOD trace
+VAR_INPUT
+	message						: T_MAXSTRING;  // STRING(255)
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

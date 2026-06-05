@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.66">
-	<Project ProjectGUID="{F2F7BD3B-8958-4BE9-96BE-96EA155DEA02}" Target64Bit="true" ShowHideConfigurations="#x106">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.24" TcVersionFixed="true">
+	<Project ProjectGUID="{F2F7BD3B-8958-4BE9-96BE-96EA155DEA02}" Target64Bit="true" ShowHideConfigurations="#x3c7">
 		<System>
-			<Settings MaxCpus="6" NonWinCpus="2" Packages="2">
+			<Settings MaxCpus="6" NonWinCpus="2">
 				<Cpu CpuId="4"/>
 			</Settings>
 			<Tasks>
@@ -12,11 +12,50 @@
 				<Task Id="4" Priority="21" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>PlcTask1</Name>
 				</Task>
+				<Task Id="5" Priority="22" CycleTime="100000" AmsPort="352" AdtTasks="true">
+					<Name>PlcTask2</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
-			<Project File="PLC.xti"/>
 			<Project File="PLC_NoOOP.xti"/>
+			<Project File="PLC_OOP.xti"/>
+			<Project File="PLC_FrameworkOOP.xti"/>
 		</Plc>
+		<Analytics ConfigVersion="1.4">
+			<Name>ANALYTICS</Name>
+			<ImageId>437</ImageId>
+			<Config>
+				<StreamTargets>
+					<StreamTargetItem Id="f4b6099c-cd1e-48af-8c78-af48928f03ac">
+						<Name>Boot Project Path</Name>
+						<Type>FILE</Type>
+						<Directory>%TC_BOOTPRJPATH%</Directory>
+						<MqttConnectionSettings>
+							<Broker>127.0.0.1</Broker>
+							<BrokerPort>1883</BrokerPort>
+							<UserID/>
+							<WithCertificates>false</WithCertificates>
+							<CA_Certificate/>
+							<Cert_Certificate/>
+							<Key_Certificate/>
+							<CommunicationTimeout>30000000</CommunicationTimeout>
+							<KeepAlivePeriod>600000000</KeepAlivePeriod>
+							<TcpBufferSize>32768</TcpBufferSize>
+							<SecurityType>NO_SECURITY</SecurityType>
+							<TlsVersion>TLS_1_2</TlsVersion>
+							<Insecure>false</Insecure>
+							<IgnoreExpiration>false</IgnoreExpiration>
+							<IsPskIdCaseSensitive>false</IsPskIdCaseSensitive>
+							<IgnoreCnMismatch>false</IgnoreCnMismatch>
+							<TargetPaths>false</TargetPaths>
+							<PskMode>HexKey</PskMode>
+						</MqttConnectionSettings>
+						<TimeType>None</TimeType>
+					</StreamTargetItem>
+				</StreamTargets>
+				<ActivateAlyLogger>true</ActivateAlyLogger>
+			</Config>
+		</Analytics>
 	</Project>
 </TcSmProject>

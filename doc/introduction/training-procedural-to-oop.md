@@ -694,7 +694,7 @@ The other SOLID principles are also visible:
 
 ## Summary
 
-| Aspect | Procedural (`PLC_NoOOP`) | OOP (`PLC`) |
+| Aspect | Procedural (`PLC_NoOOP`) | OOP (`PLC_OOP`) |
 |---|---|---|
 | GVL | Flat list of I/O addresses | Parts list of named objects |
 | MAIN | All control logic | Two lines |

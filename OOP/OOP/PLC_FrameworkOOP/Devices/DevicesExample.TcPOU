@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="DevicesExample" Id="{c8f4a231-7b3e-4d91-a85f-2e6c9d047b13}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM DevicesExample
+VAR
+    noInput         : DigitalInputNO('I201.1', GVL_Logger.logger);
+    ncInput         : DigitalInputNC('I201.2', GVL_Logger.logger);
+    dummyInput      : DigitalInputDummy('Undefined IO', GVL_Logger.logger);
+
+    noActive        : BOOL;
+    ncActive        : BOOL;
+    dummyActive     : BOOL;
+
+    noNotActive     : BOOL;
+    ncNotActive     : BOOL;
+    dummyNotActive  : BOOL;
+
+    noName          : STRING;
+    ncName          : STRING;
+    dummyName       : STRING;
+
+    noPath          : STRING;
+    ncPath          : STRING;
+    dummyPath       : STRING;
+
+    traceAll        : BOOL;
+    traceAllTrig    : R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[noActive    := noInput.isActive;
+ncActive    := ncInput.isActive;
+dummyActive := dummyInput.isActive;
+
+noNotActive    := noInput.isNotActive;
+ncNotActive    := ncInput.isNotActive;
+dummyNotActive := dummyInput.isNotActive;
+
+noName    := noInput.name;
+ncName    := ncInput.name;
+dummyName := dummyInput.name;
+
+noPath    := noInput.path;
+ncPath    := ncInput.path;
+dummyPath := dummyInput.path;
+
+traceAllTrig(CLK := traceAll);
+IF traceAllTrig.Q THEN
+    noInput.trace(noInput.name);
+    ncInput.trace(ncInput.name);
+    dummyInput.trace(dummyInput.name);
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

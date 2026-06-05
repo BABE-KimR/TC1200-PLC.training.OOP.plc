@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="Base" Id="{691e5c5d-4b10-4eef-86d7-b1ce8df84e2e}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'Base is a class, do not call this POU directly, use a method'}
+{attribute 'hide_all_locals'}
+{attribute 'reflection'}
+FUNCTION_BLOCK ABSTRACT Base
+VAR
+    {attribute 'instance-path'}
+    {attribute 'noinit'}
+    _path   : T_MAXSTRING;
+
+	// Locals 
+   _name   : T_MAXSTRING;
+    _logger : I_Logger;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_Init" Id="{30c63446-bc96-435b-a4f6-0ed3aa33960d}">
+      <Declaration><![CDATA[METHOD FB_Init : BOOL
+VAR_INPUT
+    bInitRetains : BOOL;
+    bInCopyCode  : BOOL;
+    name         : STRING;
+    logger       : I_Logger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_name   := name;
+_logger := logger;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="name" Id="{94530714-4f62-43b0-bd5e-6a5ea5273e6e}">
+      <Declaration><![CDATA[PROPERTY name : string]]></Declaration>
+      <Get Name="Get" Id="{d705c8ca-e1b7-4ceb-822c-3f6e442858af}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[name := _name;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="path" Id="{eaa4fbd5-a93a-4421-9eb7-72d1cf6e92c7}">
+      <Declaration><![CDATA[PROPERTY path : string]]></Declaration>
+      <Get Name="Get" Id="{866da755-f670-4e64-a217-cb05c8cd0f62}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[path := _path;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="trace" Id="{c35e6399-ec56-40cf-a279-c2712ea742df}">
+      <Declaration><![CDATA[METHOD trace
+VAR_INPUT
+    message : T_MAXSTRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _logger <> 0 THEN
+    _logger.trace(message);
+ELSE
+    ADSLOGSTR(msgCtrlMask := ADSLOG_MSGTYPE_HINT, msgFmtStr := message, strArg := '');
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

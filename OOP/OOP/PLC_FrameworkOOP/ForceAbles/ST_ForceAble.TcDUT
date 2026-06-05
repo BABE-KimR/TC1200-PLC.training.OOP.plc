@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <DUT Name="ST_ForceAble" Id="{4aba12ce-13d9-420a-98e7-46c9744eb43c}">
+    <Declaration><![CDATA[TYPE ST_ForceAble :
+STRUCT
+    name       : T_MaxString;
+    path       : T_MaxString;
+    value      : BOOL;
+    forceValue : BOOL;
+    forced     : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

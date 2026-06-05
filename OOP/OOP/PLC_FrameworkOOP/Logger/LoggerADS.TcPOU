@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="LoggerADS" Id="{7d8366ed-f454-4534-b8f1-0732cac7bf2c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LoggerADS IMPLEMENTS I_Logger 
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="trace" Id="{f7e97f75-c3ef-4d1b-96b4-9e73a98a8ea2}">
+      <Declaration><![CDATA[METHOD trace
+VAR_INPUT
+	message	: T_MAXSTRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ ADSLOGSTR(msgCtrlMask := ADSLOG_MSGTYPE_HINT, msgFmtStr := message, strArg := '');
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

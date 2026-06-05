@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="DevicesPolymorphismExample" Id="{a3e27b14-5f8c-4e02-b961-3d7a0c8e1f45}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM DevicesPolymorphismExample
+VAR
+    noInput    : DigitalInputNO('Poly.NO', GVL_Logger.logger);
+    ncInput    : DigitalInputNC('Poly.NC', GVL_Logger.logger);
+    dummyInput : DigitalInputDummy('Poly.Dummy', GVL_Logger.logger);
+
+    inputs      : ARRAY[0..2] OF I_DigitalInput;
+    active      : ARRAY[0..2] OF BOOL;
+	allActive	: BOOL;
+
+    i           : INT;
+    initialized : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT initialized THEN
+    inputs[0] := noInput;
+    inputs[1] := ncInput;
+    inputs[2] := dummyInput;
+    initialized := TRUE;
+END_IF
+
+allActive := TRUE;
+FOR i := 0 TO 2 DO
+    IF inputs[i] <> 0 THEN
+        active[i] := inputs[i].isActive;
+		allActive := allActive AND active[i]; 
+    END_IF
+END_FOR
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

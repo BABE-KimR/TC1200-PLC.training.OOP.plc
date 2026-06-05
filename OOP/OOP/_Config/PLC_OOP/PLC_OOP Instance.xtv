@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.24" ClassName="CTComPlcObjDef">
+	<Instance TmcHash="{587E9598-97B2-B7C7-DBA3-B92D4F1B7847}">
+		<Vars VarGrpType="1">
+			<Name>PlcTask Inputs</Name>
+			<Var>
+				<Name>GVL.emergencyStopButton.input</Name>
+				<Type>BOOL</Type>
+			</Var>
+			<Var>
+				<Name>GVL.stopButton.input</Name>
+				<Type>BOOL</Type>
+			</Var>
+			<Var>
+				<Name>GVL.startButton.input</Name>
+				<Type>BOOL</Type>
+			</Var>
+			<Var>
+				<Name>GVL.productDetectedSensor.input</Name>
+				<Type>BOOL</Type>
+			</Var>
+			<Var>
+				<Name>GVL.conveyorFullSensor.input</Name>
+				<Type>BOOL</Type>
+			</Var>
+		</Vars>
+		<Vars VarGrpType="2" AreaNo="1">
+			<Name>PlcTask Outputs</Name>
+			<Var>
+				<Name>GVL.conveyorMotor.contactor.output</Name>
+				<Type>BOOL</Type>
+			</Var>
+		</Vars>
+	</Instance>
+</TcSmItem>

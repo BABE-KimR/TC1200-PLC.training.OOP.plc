@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <Itf Name="I_Bool" Id="{b1a2c3d4-e5f6-7890-abcd-ef1234567890}">
+    <Declaration><![CDATA[INTERFACE I_Bool
+]]></Declaration>
+    <Property Name="value" Id="{c2b3d4e5-f6a7-8901-bcde-f12345678901}">
+      <Declaration><![CDATA[PROPERTY value : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d3c4e5f6-a7b8-9012-cdef-123456789012}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

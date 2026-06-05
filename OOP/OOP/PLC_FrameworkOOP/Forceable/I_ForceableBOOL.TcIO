@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <Itf Name="I_ForceableBOOL" Id="{e4d5f6a7-b8c9-0123-defa-234567890123}">
+    <Declaration><![CDATA[INTERFACE I_ForceableBOOL EXTENDS I_Bool
+]]></Declaration>
+    <Property Name="name" Id="{11aa22bb-33cc-44dd-55ee-66ff77889900}">
+      <Declaration><![CDATA[PROPERTY name : STRING]]></Declaration>
+      <Get Name="Get" Id="{22bb33cc-44dd-55ee-66ff-778899001122}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="path" Id="{33cc44dd-55ee-66ff-7788-990011223344}">
+      <Declaration><![CDATA[PROPERTY path : STRING]]></Declaration>
+      <Get Name="Get" Id="{44dd55ee-66ff-7788-9900-112233445566}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="force" Id="{f5e6a7b8-c9d0-1234-efab-345678901234}">
+      <Declaration><![CDATA[METHOD force
+VAR_INPUT
+    forcedValue : BOOL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="release" Id="{a6f7b8c9-d0e1-2345-fabc-456789012345}">
+      <Declaration><![CDATA[METHOD release
+]]></Declaration>
+    </Method>
+    <Property Name="isForced" Id="{b7a8c9d0-e1f2-3456-abcd-567890123456}">
+      <Declaration><![CDATA[PROPERTY isForced : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c8b9d0e1-f2a3-4567-bcde-678901234567}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

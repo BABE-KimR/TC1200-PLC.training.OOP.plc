@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="MAIN" Id="{1593e7da-0106-4d2c-9dea-9594914e3509}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[DevicesExample();
+ForceableExample();
+DevicesPolymorphismExample();
+GVL_Forceables.manager.renew();
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

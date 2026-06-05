@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="ForceableExample" Id="{aabb1122-ccdd-3344-eeff-556677889900}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM ForceableExample
+VAR
+    logger          : LoggerADS;
+
+    // NC input: hardware reads TRUE when inactive, FALSE when active
+    input           : DigitalInputNC('Door sensor', logger);
+
+    // observed values — updated every scan via the proxy
+    isActive        : BOOL;
+    isNotActive     : BOOL;
+    isForced        : BOOL;
+    rawSignalValue  : BOOL;
+
+    // force controls — set from online view
+    forceActive     : BOOL;
+    forceInactive   : BOOL;
+    releaseForce    : BOOL;
+
+    forceActiveTrig   : R_TRIG;
+    forceInactiveTrig : R_TRIG;
+    releaseTrig       : R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// read proxied values every scan
+isActive       := input.isActive;
+isNotActive    := input.isNotActive;
+isForced       := input.signal.isForced;
+rawSignalValue := input.signal.value;
+
+// force the raw NC signal to FALSE  →  isActive = NOT FALSE = TRUE
+// simulates: door sensor is activated (contact opened on NC wiring)
+forceActiveTrig(CLK := forceActive);
+IF forceActiveTrig.Q THEN
+    input.signal.force(FALSE);
+END_IF
+
+// force the raw NC signal to TRUE  →  isActive = NOT TRUE = FALSE
+// simulates: door sensor is inactive (contact closed at rest on NC wiring)
+forceInactiveTrig(CLK := forceInactive);
+IF forceInactiveTrig.Q THEN
+    input.signal.force(TRUE);
+END_IF
+
+// release the force — isActive resumes following the real hardware input
+releaseTrig(CLK := releaseForce);
+IF releaseTrig.Q THEN
+    input.signal.release();
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
